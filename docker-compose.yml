@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  api:
+    build:
+      context: ./docker
+      args:
+        - PROJECT_WORKING_DIR=${PROJECT_WORKING_DIR}
+    env_file:
+      - ./src/.env
