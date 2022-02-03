@@ -3,8 +3,12 @@ version: "3.7"
 services:
   api:
     build:
-      context: ./docker
+      context: .
+      dockerfile: ./docker/Dockerfile
       args:
         - PROJECT_WORKING_DIR=${PROJECT_WORKING_DIR}
+    volumes:
+      - ./src:/src
     env_file:
-      - ./src/.env
+      # - ./src/.env
+      - ./.env
