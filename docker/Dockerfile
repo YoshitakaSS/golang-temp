@@ -9,16 +9,13 @@ ENV GOARCH=amd64
 ENV GO111MODULE=on
 RUN apk --no-cache add make
 
-COPY ../src/go.mod ./
-COPY ../src/go.sum ./
-# RUN if [ -e ../src/go.sum ]; then \
-#         COPY ../src/go.sum ./; \
-#     fi
+COPY ./src/go.mod ./
+RUN if [ -e ./src/go.sum ]; then \
+        COPY ./src/go.sum ./; \
+    fi
 
 RUN go mod download
-COPY ../src ./
-
-RUN ls ./
+COPY ./src ./
 
 RUN make build
 
