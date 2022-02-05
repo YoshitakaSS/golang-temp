@@ -1,5 +1,4 @@
 FROM golang:1.16-alpine as builder
-
 ARG PROJECT_WORKING_DIR
 WORKDIR ${PROJECT_WORKING_DIR}
 
@@ -7,15 +6,12 @@ ENV CGO_ENABLED=0
 ENV GOOS=linux
 ENV GOARCH=amd64
 ENV GO111MODULE=on
+ENV GOPATH=
 RUN apk --no-cache add make
 
-COPY ./src/go.mod ./
-RUN if [ -e ./src/go.sum ]; then \
-        COPY ./src/go.sum ./; \
-    fi
-
+COPY ./src/go.mod ./src/go.sum ./
 RUN go mod download
-COPY ./src ./
+COPY ./src .
 
 RUN make build
 
