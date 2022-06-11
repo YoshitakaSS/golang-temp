@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+
+	"github.com/labstack/echo"
+)
 
 func main() {
-	fmt.Println("OK")
+	e := echo.New()
+
+	e.GET("/health", func(c echo.Context) error {
+		return c.NoContent(http.StatusOK)
+	})
+
 }
