@@ -15,11 +15,10 @@ COPY ./src .
 RUN go mod tidy && \
     go install github.com/cosmtrek/air@latest
 
-CMD ["air", "-c", ".air.toml"]
+CMD ["air"]
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder ${PROJECT_WORKING_DIR} /app
-EXPOSE 1323
 CMD ["/app"]
