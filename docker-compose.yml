@@ -11,7 +11,6 @@ services:
     container_name: api
     tty: true
     stdin_open: true
-    # command: "air -c .air.toml"
     ports:
       - 1323:1323
     volumes:
