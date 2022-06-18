@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      target: dev
+      args:
+        - PROJECT_WORKING_DIR=${PROJECT_WORKING_DIR}
+    container_name: api
+    tty: true
+    stdin_open: true
+    ports:
+      - 1323:1323
+    volumes:
+      - ./src:/src
+    env_file:
+      # - ./src/.env
+      - ./.env
